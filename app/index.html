@@ -2,13 +2,20 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>My AngularJS App</title>
+  <title>Fantasy Football Manager</title>
   <link rel="stylesheet" href="css/app.css"/>
+  <link rel="stylesheet" href="css/bootstrap.css"/>
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
+
+
+
+http://api.espn.com/v1/sports/football/nfl/teams/1?rostertype=full&apikey=6w3k6rxsnm4a8g6sn9k9rq8s
+
+  <ul class="nav nav-tabs">
+    <li><a href="#/Main" data-toggle="tab">Home</a></li>
+    <li><a href="#/Research" data-toggle="tab">Research</a></li>
+    <li><a href="#/"
   </ul>
 
   <div ng-view></div>
@@ -24,5 +31,6 @@
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
+  <script src="js/bootstrap.js"></script>
 </body>
 </html>

@@ -16,7 +16,9 @@
 }
 
 .menu > li {
-  display: inline;
+  display:  inline-table;
+  font-family: cursive;
+  
 }
 
 .menu > li:before {
