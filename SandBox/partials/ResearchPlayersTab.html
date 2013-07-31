@@ -1,0 +1,25 @@
+
+
+ 
+ <h4> Select NFL Team </h4>
+ <input type="submit" ng-click="add()" value="Start Search"> <br />
+ <select ng-model="Team" ng-options="x.nickname for x in teams"></select><br>
+ <select ng-model="Player" ng-options="x.nickname for x in Team"></select><br>
+
+
+
+	<input type="text" ng-model="newMessage">
+	
+		
+
+	<!--  
+
+ <ul ng-repeat = "x in teams" >
+ 	 
+ 	<input type="checkbox" id={{ x.id }}>  
+					{{ x.nickname }}	
+			 
+	 
+</ul>
+
+-->
