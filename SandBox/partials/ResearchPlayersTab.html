@@ -1,25 +1,57 @@
 
 
  
- <h4> Select NFL Team </h4>
- <input type="submit" ng-click="add()" value="Start Search"> <br />
- <select ng-model="Team" ng-options="x.nickname for x in teams"></select><br>
- <select ng-model="Player" ng-options="x.nickname for x in Team"></select><br>
+ <div class="span3" color="gray">
 
+  	<h4>Player Filter</h4>
 
+	<div ng-init="addNFLTeams()" >
+ 
+	 	<p class="text-primary"> Team: </p>
+	 	<select ng-model="IsTeamSelected" ng-options="x.FullName for x in teams"></select>
+	 	<br />
+	 	<span ng-show="IsTeamSelected">
+	 		<p class="text-primary"> Position: </p>
+	 		<select ng-model="IsPositionSelected" ng-options="x.name for x in Team"></select><br />	
+	 		<br />
+	 	</span>
+	 	<span ng-show="IsPositionSelected">
+	 		<p class="text-primary"> Player: </p>
+	 		<select ng-model="IsPlayerSelected" ng-options="x.name for x in Players"></select><br />
+	 	</span>
 
-	<input type="text" ng-model="newMessage">
-	
+	 	<button type="button" class="btn btn-primary" ng-model="IsTeamSelected">Go</button>
 		
+	</div>
+ 
+   
+  	
+ </div>
 
-	<!--  
+ <div ng-init="addNFLPlayers()" >
 
- <ul ng-repeat = "x in teams" >
- 	 
- 	<input type="checkbox" id={{ x.id }}>  
-					{{ x.nickname }}	
-			 
-	 
-</ul>
-
--->
+ </div>
+ <div class="span8 offset1">
+ 	<table class="table table-hover">
+   		<tbody>
+   			<tr>
+   				<th title="No">NO.</th>
+   				<th title="Name">NAME</th>
+   				<th title="Position">POS</th>
+   				<th title="Age">AGE</th>
+   				<th title="Height">HEIGHT</th>
+   				<th title="Weight">WEIGHT</th>
+   				<th title="Experience">EXP</th>
+   				<th title="College">COLLEGE</th>
+   			</tr>
+   			<tr ng-repeat="athlete in athletes">
+   				<td> {{ athlete.id}} </td>
+   				<td> {{ athlete.displayName}} </td> 
+   				 
+   			</tr>
+   		</tbody>
+	</table>
+ 	
+ </div>
+ 
+ 

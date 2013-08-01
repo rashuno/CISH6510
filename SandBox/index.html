@@ -4,20 +4,22 @@
   <meta charset="utf-8">
   <title>Fantasy Football Manager</title>
   <link rel="stylesheet" href="css/app.css"/>
-  <link rel="stylesheet" href="css/bootstrap.css"/>
+  <link rel="stylesheet" href="css/bootstrap.css"  />
 </head>
 <body ng-app="myApp">
 
-
-  <div>
-     <img src="img/topMain.png" align='right'/>  <br />
-
-  </div> 
-  <div id = "navBar" class="pull-bottom">
-  <ul class="nav nav-tabs" >
-        <li><a href="#/Home" data-toggle="tab">Home</a></li>
-        <li><a href="#/ResearchPlayers" data-toggle="tab">Research Players</a></li>
-        <li><a href="#/MyDraft" data-toggle="tab">My Draft</a></li>    
+ 
+  <div align = 'right'>
+  
+     <img src="img/topMain.png" />   
+  </div>  
+  
+  <div id = "navBar" ng-init="m1='active'">
+ 
+  <ul class="nav nav-pills" >
+        <li class={{m1}}><a href="#/Home" ng-click="m2='';m3='';m1='active'"> Home </a></li>
+        <li class={{m2}}><a href="#/ResearchPlayers" ng-click="m1='';m3='';m2='active'">Research Players</a></li>
+        <li class={{m3}}><a href="#/MyDraft" ng-click="m1='';m2='';m3='active'" >My Draft</a></li>    
   </ul>
   
   </div>
