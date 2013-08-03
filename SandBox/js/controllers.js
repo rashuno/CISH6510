@@ -23,7 +23,7 @@ var homeCtrl = myApp.controller('HomeCtrl', [function($scope) {
  }]);
 
   
-var researchCtrl = myApp.controller('ResearchCtrl', ['$scope', '$http', function($scope, $http) {
+var researchPlayersCtrl = myApp.controller('ResearchPlayersCtrl', ['$scope', '$http', function($scope, $http) {
 
 	/* $scope.url = "http://api.espn.com/v1/sports/football/nfl/teams/?apikey=6w3k6rxsnm4a8g6sn9k9rq8s";  
 		http://api.espn.com/v1/sports/football/nfl/athletes/?offset=0&apikey=6w3k6rxsnm4a8g6sn9k9rq8s   OFFSET
@@ -57,21 +57,28 @@ var researchCtrl = myApp.controller('ResearchCtrl', ['$scope', '$http', function
 	
 	$scope.addNFLTeams = function() {
 		$http.defaults.useXDomain = true;
-		$scope.url = 'http://api.nfldata.apiphany.com/trial/JSON/Teams/2013REG?key=44d7bd92-a369-4a22-b188-3c12303890c2';
+		$scope.url = 'http://api.espn.com/v1/sports/football/nfl/teams/?apikey=6w3k6rxsnm4a8g6sn9k9rq8s';
 		$http.get($scope.url).then(function(response) {
 		
-			/*
+			
 				sports = response.data.sports;
 				leagues = sports[0].leagues;
-			*/	
-				$scope.teams = response.data; /* leagues[0].teams; */
+			
+				$scope.teams = leagues[0].teams; 
 				
 					
 		});
 	};
 
 
+
 	$scope.addNFLPlayers = function() {
+
+
+		//Need to iterate over Max Players
+
+
+
 		$http.defaults.useXDomain = true;
 		$scope.url = 'http://api.espn.com/v1/sports/football/nfl/athletes/?apikey=6w3k6rxsnm4a8g6sn9k9rq8s';
 		$http.get($scope.url).then(function(response){
@@ -84,12 +91,13 @@ var researchCtrl = myApp.controller('ResearchCtrl', ['$scope', '$http', function
 		});
 	};
 	
-
+		
 
 
 }]);
 
-var draftCtrl = myApp.controller('DraftCtrl', ['$scope', '$http', function($scope, $http) { 
+
+var myDraftCtrl = myApp.controller('MyDraftCtrl', ['$scope', '$http', function($scope, $http) { 
 	
 
 	
@@ -101,3 +109,58 @@ var draftCtrl = myApp.controller('DraftCtrl', ['$scope', '$http', function($scop
   
 
  }]);
+
+
+
+var sortableTableCtrl = myApp.controller('SortableTableCtrl', ['$scope', function ( $scope ) {
+    	 
+
+ 		var scope = this;
+	    // data
+	    $scope.PlayerDataHead = {
+	        a: "ADD",
+	        b: "NAME",
+	        c: "TEAM",
+	        d: "POS",
+	        e: "AGE",
+	        f: "HEIGHT",
+	        g: "WEIGHT",
+	        h: "EXP",
+	        i: "COL"
+	    };
+    
+ 	$scope.column = 'b';
+ 	$scope.descending = false;
+    
+    /*
+    $scope.sort = {
+        column: 'b',
+        descending: false
+    };
+	*/
+
+    $scope.selectedCls = function(column) {
+        $scope.column == $scope.column && 'sort-' + $scope.descending;
+    };
+    
+    /*
+    $scope.changeSorting = function(column) {
+        var sortLocal = $scope.sort;
+        if (sortLocal.column == $scope.column) {
+            sortLocal.descending = !sortLocal.descending;
+        } else {
+            sortLocal.column = $scope.column;
+            sortLocal.descending = false;
+        }
+    };
+	  */   
+
+
+
+
+
+
+
+
+
+	}]);

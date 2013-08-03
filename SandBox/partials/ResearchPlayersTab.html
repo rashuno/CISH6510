@@ -3,50 +3,51 @@
  
  <div class="span3" color="gray">
 
-  	<h4>Player Filter</h4>
-
 	<div ng-init="addNFLTeams()" >
- 
-	 	<p class="text-primary"> Team: </p>
-	 	<select ng-model="IsTeamSelected" ng-options="x.FullName for x in teams"></select>
-	 	<br />
-	 	<span ng-show="IsTeamSelected">
-	 		<p class="text-primary"> Position: </p>
-	 		<select ng-model="IsPositionSelected" ng-options="x.name for x in Team"></select><br />	
-	 		<br />
-	 	</span>
-	 	<span ng-show="IsPositionSelected">
-	 		<p class="text-primary"> Player: </p>
-	 		<select ng-model="IsPlayerSelected" ng-options="x.name for x in Players"></select><br />
-	 	</span>
+  <p class="text-primary" align='center'>Name Search</p>
+  <input ng-model="searchText">
+  <br /><br />
 
-	 	<button type="button" class="btn btn-primary" ng-model="IsTeamSelected">Go</button>
-		
+    <center>
+	 	<button type="button" ng-click="" class="btn btn-primary">Add Checked</button>
+		</center>
+    <br /><br /><br />
+    <p class="text-primary" align='center'>Quick Filter</p>
+    <select ng-model="IsFilterSelected"> 
+      <option>TEAM</option>
+      <option>POS</option> 
+      <option>COLLEGE</option>
+    </select>
+    <br />
+
+    <span ng-show="IsFilterSelected">
+      <select ng-model="IsPositionSelected" ng-options="x.name for x in Team"></select><br /> 
+      <br />
+    </span>
 	</div>
  
-   
-  	
+    
  </div>
 
  <div ng-init="addNFLPlayers()" >
 
  </div>
  <div class="span8 offset1">
- 	<table class="table table-hover">
+ 	<table class="table table-hover" ng-controller="SortableTableCtrl">
    		<tbody>
    			<tr>
-   				<th title="No">NO.</th>
-   				<th title="Name">NAME</th>
-   				<th title="Position">POS</th>
-   				<th title="Age">AGE</th>
-   				<th title="Height">HEIGHT</th>
-   				<th title="Weight">WEIGHT</th>
-   				<th title="Experience">EXP</th>
-   				<th title="College">COLLEGE</th>
+   				<th ng-repeat="(i,th) in PlayerDataHead" ng-class="selectedCls(i)" ng-click="changeSorting(i)">{{th}}</th>
    			</tr>
-   			<tr ng-repeat="athlete in athletes">
-   				<td> {{ athlete.id}} </td>
-   				<td> {{ athlete.displayName}} </td> 
+   			<tr ng-repeat="athlete in athletes | filter:searchText">
+   				<td> <input type="checkbox" ng-model="selectedPlayer"></td>
+   				<td> {{ athlete.displayName}} </td>  
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
    				 
    			</tr>
    		</tbody>
