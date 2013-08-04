@@ -5,24 +5,31 @@
   <title>Fantasy Football Manager</title>
   <link rel="stylesheet" href="css/app.css"/>
   <link rel="stylesheet" href="css/bootstrap.css"  />
+  <link rel="stylesheet" href="css/customStyles.css" />
 </head>
 <body ng-app="myApp">
 
+ <!-- Sticky Header -->
+<div id="header_container">
+    <div id="header">
+      <div align = 'right'>
+        <img src="img/topMain.png" />   
+      </div>  
+  
+      <div id = "navBar" ng-init="m1='active'">
  
-  <div align = 'right'>
+        <ul class="nav nav-pills" >
+          <li class={{m1}}><a href="#/Home" ng-click="m2='';m3='';m1='active'"> Home </a></li>
+          <li class={{m2}}><a href="#/Players" ng-click="m1='';m3='';m2='active'">Players</a></li>
+          <li class={{m3}}><a href="#/MyDraft" ng-click="m1='';m2='';m3='active'" >My Draft</a></li>    
+        </ul>
   
-     <img src="img/topMain.png" />   
-  </div>  
-  
-  <div id = "navBar" ng-init="m1='active'">
- 
-  <ul class="nav nav-pills" >
-        <li class={{m1}}><a href="#/Home" ng-click="m2='';m3='';m1='active'"> Home </a></li>
-        <li class={{m2}}><a href="#/Players" ng-click="m1='';m3='';m2='active'">Players</a></li>
-        <li class={{m3}}><a href="#/MyDraft" ng-click="m1='';m2='';m3='active'" >My Draft</a></li>    
-  </ul>
-  
-  </div>
+      </div>
+    </div>
+</div>
+
+<!-- Page Content -->
+
  
   <div ng-view>
   

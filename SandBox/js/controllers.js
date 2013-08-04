@@ -4,6 +4,13 @@
 var myApp = angular.module('myApp.controllers', []);
 
 
+var initGlobals = myApp.controller('initGlobals', [function ($scope){
+
+	$scope.IsFilterSelected(false);
+
+}]);
+
+
 var homeCtrl = myApp.controller('HomeCtrl', [function($scope) { 
 
 
@@ -45,9 +52,9 @@ var researchPlayersCtrl = myApp.controller('ResearchPlayersCtrl', ['$scope', '$h
 	
 	
 
+
 	/* Get Teams Data JSON From ESPN Dev API  */
 	
-	$scope.newMessage = "";
 	
 	 var sports = {};
 	 var leagues = {};
@@ -100,8 +107,55 @@ var researchPlayersCtrl = myApp.controller('ResearchPlayersCtrl', ['$scope', '$h
 var myDraftCtrl = myApp.controller('MyDraftCtrl', ['$scope', '$http', function($scope, $http) { 
 	
 
-	
+	$scope.addDrafts = function() {
+
+
+		$http.defaults.useXDomain = true;
+		$scope.url = 'http://localhost:3000/drafts';
+		$http.get($scope.url).then(function(response){
+
+			$scope.drafts = response.data; 
+
+		});
+	};
   
+
+	$scope.onCreateNewDraftButtonClick = function(){
+
+		$scope.newDraft = {};
+
+		$scope.newDraft._id = "5063114bd386d8fadbd6b004";
+		$scope.newDraft.ownerId = 'rashuno';
+		$scope.newDraft.leagueGuid = 'rashuno something';
+		$scope.newDraft.dateCreated = '891261';
+		$scope.newDraft.name = 'nothing';
+		$scope.newDraft.leagueName = 'none';
+
+		$scope.url = 'http://localhost:3000/drafts';
+
+/*
+		$http.post( $scope.url, $scope.newDraft, {
+
+			}).success(function(responseData){
+
+			});
+
+*/
+		$http.defaults.useXDomain = true;
+		
+		$http({
+			method : 'POST',
+			url : 'http://localhost:3000/drafts',
+			data : $scope.newDraft
+		})
+
+
+
+
+	};
+
+
+
 /*
    var dataObj =
   GetESPNTeamFeedData($scope);

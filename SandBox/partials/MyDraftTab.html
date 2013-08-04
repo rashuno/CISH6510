@@ -1,18 +1,59 @@
 
 
-<H3> Draft </H3>
+ <br /><br /><br /><br /><br /><br /><br /><br /><br />
 
+
+
+ <div class="span3" bgColor="gray" >
+
+	<div ng-init="addDrafts()" >
+	  <p class="text-primary" align='center'>Draft Search</p>
+	  <input ng-model="searchText">
+	  <br /><hr>
+
+	  <div id="NewDaftInput">
+	  	<p class="text-primary" align='center'>Draft Name</p>
+	  	<input ng-model="newDraft.Name">
+	  	<p class="text-primary" align='center'>League Name</p>
+	  	<input ng-model="newDraft.LeagueName">
+	  	<p class="text-primary" align='center'>Owner Name</p>
+	  	<input ng-model="newDraft.OwnerName">
+	  	<p class="text-primary" align='center'>Password</p>
+	  	<input ng-model="newDraft.OwnerPassword">
+	  	<br /> <br />
+    	<center>
+	 		<button type="button" ng-click="onCreateNewDraftButtonClick()" class="btn btn-primary">Create New</button>
+		</center>
+	    <br /><br /><br />
+      </div>
+	</div>
  
- <h4> Teams </h4>
-	<input type="text" ng-model="newMessage">
-	<input type="submit" ng-click="add()" value="Click to find out!">
-		
+    
+ </div>
 
+ <div ng-init="addNFLPlayers()" >
 
- <ul >
-	<li ng-repeat = "x in teams">
-			 
-					{{ x.nickname }}	
-			 
-	</li>
-</ul>
+ </div>
+ <div class="span8 offset1">
+ 	<table class="table table-hover" ng-controller="SortableTableCtrl">
+   		<tbody>
+   			<tr>
+   				<th></th>
+   				<th>NAME</th>
+   				<th>CREATED</th>
+   				<th>LEAGUE NAME</th>
+   				<th>OWNER</th>
+   			</tr>
+   			<tr ng-repeat="draft in drafts | filter:searchText">
+   				<td> <button type="button" ng-click="" class="btn btn-primary btn-mini">Go</button></td>
+   				<td> {{ draft.name}} </td>  
+   				<td> {{ draft.dateCreated }} </td>
+   				<td> {{ draft.leagueName }} </td>	
+   				<td> {{ draft.ownerId }} </td>  
+   			</tr>
+   		</tbody>
+	</table>
+ 	
+ </div>
+ 
+ 
