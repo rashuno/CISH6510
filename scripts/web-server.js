@@ -240,5 +240,26 @@ StaticServlet.prototype.writeDirectoryIndex_ = function(req, res, path, files) {
   res.end();
 };
 
+
+/*
+ var MongoClient = require('mongodb').MongoClient
+    , format = require('util').format;    
+
+  MongoClient.connect('mongodb://127.0.0.1:27017/DraftManager', function(err, db) {
+    if(err) throw err;
+
+    db.collection('drafts').insert({hello: 'world'}, {w:1}, function(err, objects) {
+      if (err) console.warn(err.message);
+      if (err && err.message.indexOf('E11000 ') !== -1) {
+        // this _id was already inserted in the database
+      }
+    });
+  });
+
+
+*/
+
+
+
 // Must be last,
 main(process.argv);

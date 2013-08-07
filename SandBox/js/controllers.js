@@ -107,6 +107,8 @@ var researchPlayersCtrl = myApp.controller('ResearchPlayersCtrl', ['$scope', '$h
 var myDraftCtrl = myApp.controller('MyDraftCtrl', ['$scope', '$http', function($scope, $http) { 
 	
 
+
+
 	$scope.addDrafts = function() {
 
 
@@ -121,47 +123,33 @@ var myDraftCtrl = myApp.controller('MyDraftCtrl', ['$scope', '$http', function($
   
 
 	$scope.onCreateNewDraftButtonClick = function(){
+  
+		var d = new Date();
+		var drafts = [{
 
-		$scope.newDraft = {};
+			name: $scope.newDraft.Name,
+			dateCreated:  d,
+			leagueName: $scope.newDraft.LeagueName,
+			leagueGuid: $scope.newDraft.OwnerName + "-" +  d,
+			ownerId: $scope.newDraft.OwnerName
 
-		$scope.newDraft._id = "5063114bd386d8fadbd6b004";
-		$scope.newDraft.ownerId = 'rashuno';
-		$scope.newDraft.leagueGuid = 'rashuno something';
-		$scope.newDraft.dateCreated = '891261';
-		$scope.newDraft.name = 'nothing';
-		$scope.newDraft.leagueName = 'none';
+		}];
 
-		$scope.url = 'http://localhost:3000/drafts';
-
-/*
-		$http.post( $scope.url, $scope.newDraft, {
-
-			}).success(function(responseData){
-
-			});
-
-*/
+		$scope.url = 'http://localhost:3000/drafts'; 
+		$http.defaults.headers.post["Content-Type"] = "aapplication/json";
 		$http.defaults.useXDomain = true;
 		
 		$http({
 			method : 'POST',
-			url : 'http://localhost:3000/drafts',
-			data : $scope.newDraft
-		})
+			url : 'http://localhost:3000/drafts/addDraft',
+			headers: {'Content-Type': 'application/json; charset=utf-8'},
+			data : drafts
+			}).success(function () {
 
-
-
+			});s
 
 	};
-
-
-
-/*
-   var dataObj =
-  GetESPNTeamFeedData($scope);
-  */
-  
-
+ 
  }]);
 
 

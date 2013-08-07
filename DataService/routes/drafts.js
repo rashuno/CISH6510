@@ -5,7 +5,7 @@ var Server = mongo.Server,
     BSON = mongo.BSONPure;
  
 var server = new Server('localhost', 27017, {auto_reconnect: true});
-db = new Db('DraftManager', server);
+db = new Db('DraftManager', server, {safe: true});
  
 db.open(function(err, db) {
     if(!err) {
@@ -31,7 +31,10 @@ exports.findById = function(req, res) {
  
 exports.findAll = function(req, res) {
 
-    console.log(req);
+    //console.log(res);
+    //console.log(req);
+
+    console.log('Retrieving All Drafts')
 
     db.collection('drafts', function(err, collection) {
         collection.find().toArray(function(err, items) {
@@ -42,12 +45,14 @@ exports.findAll = function(req, res) {
  
 exports.addDraft = function(req, res) {
 
-    console.log(req);
+    req.accepts('application/json');  
+    console.log("exports.addDraft  -  req.body");
+    console.log(req.body);
 
-    var draft = req.body;
-    
+    var draft = req.body;   
 
     console.log('Adding Draft: ' + JSON.stringify(draft));
+
     db.collection('drafts', function(err, collection) {
         collection.insert(draft, {safe:true}, function(err, result) {
             if (err) {
@@ -58,6 +63,7 @@ exports.addDraft = function(req, res) {
             }
         });
     });
+  
 }
  
 exports.updateDraft = function(req, res) {
