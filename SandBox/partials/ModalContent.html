@@ -43,7 +43,7 @@
    				<th>OWNER</th>
    			</tr>
    			<tr ng-repeat="draft in drafts | filter:searchText">
-   				<td> <button type="button" ng-click="onClickDraftSelection()" class="btn btn-primary btn-mini">Go</button></td>
+   				<td> <button type="button" ng-click="$dialog.dialog({}).open('partials/modalContent.html')" class="btn btn-primary btn-mini">Go</button></td>
    				<td> {{ draft.name}} </td>  
    				<td> {{ draft.dateCreated }} </td>
    				<td> {{ draft.leagueName }} </td>	

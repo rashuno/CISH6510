@@ -106,9 +106,14 @@ var researchPlayersCtrl = myApp.controller('ResearchPlayersCtrl', ['$scope', '$h
 
 var myDraftCtrl = myApp.controller('MyDraftCtrl', ['$scope', '$http', function($scope, $http) { 
 	
-
-
-
+/*
+	$scope.refresh = function() {
+        $templateCache.remove('partials/MyDraftTab.html');
+        $scope.myTemplate = '';
+        $timeout(function() {
+            $scope.myTemplate = 'partials/MyDraftTab.html';
+        },1000);
+*/
 	$scope.addDrafts = function() {
 
 
@@ -135,6 +140,14 @@ var myDraftCtrl = myApp.controller('MyDraftCtrl', ['$scope', '$http', function($
 
 		}];
 
+		$scope.drafts.push({
+			name: $scope.newDraft.Name,
+			dateCreated:  d,
+			leagueName: $scope.newDraft.LeagueName,
+			leagueGuid: $scope.newDraft.OwnerName + "-" +  d,
+			ownerId: $scope.newDraft.OwnerName
+		});
+
 		$scope.url = 'http://localhost:3000/drafts'; 
 		$http.defaults.headers.post["Content-Type"] = "aapplication/json";
 		$http.defaults.useXDomain = true;
@@ -146,9 +159,17 @@ var myDraftCtrl = myApp.controller('MyDraftCtrl', ['$scope', '$http', function($
 			data : drafts
 			}).success(function () {
 
-			});s
+			});
+  
+	};
+
+	
+	$scope.onClickDraftSelection = function(){
+
+		$dialog.dialog({}).open('partials/ModalContent.html')
 
 	};
+	
  
  }]);
 
