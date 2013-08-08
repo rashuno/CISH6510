@@ -11,11 +11,12 @@ var initGlobals = myApp.controller('initGlobals', [function ($scope){
 }]);
 
 
-var homeCtrl = myApp.controller('HomeCtrl', [function($scope) { 
+var homeCtrl = myApp.controller('HomeCtrl', ['$scope', '$http',function($scope, $http) { 
 
 
   /*
   Example Team Data Get URI
+  http://api.espn.com/v1/fantasy/football/news/?apikey=6w3k6rxsnm4a8g6sn9k9rq8s
   http://api.espn.com/v1/sports/football/nfl/teams/1?rostertype=full&apikey=6w3k6rxsnm4a8g6sn9k9rq8s
   http://api.espn.com/v1/sports/football/nfl/teams/11?rostertype=full&apikey=6w3k6rxsnm4a8g6sn9k9rq8s
   
@@ -26,6 +27,20 @@ var homeCtrl = myApp.controller('HomeCtrl', [function($scope) {
   "location" :"Indianapolis"
 
   */
+  
+  //var headlines = {};
+  var keyWords = {};
+  
+  $scope.addHeadlines = function() {
+		$http.defaults.useXDomain = true;
+		$scope.url = 'http://api.espn.com/v1/fantasy/football/news/?apikey=6w3k6rxsnm4a8g6sn9k9rq8s';
+		$http.get($scope.url).then(function(response) {
+		 
+				$scope.headlines = response.data.headlines;
+				
+					
+		});
+	};
 
  }]);
 
