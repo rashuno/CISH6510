@@ -1,0 +1,53 @@
+
+
+ <br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+
+
+ <div class="span3" bgColor="gray" >
+ 	<div ng-init="addNFLPlayers()" >
+ 	<h3 align='center'> Summary </h3>
+ 	<p class="text-primary" align='left'>Draft Name: {{ currentDraft.name }}</p>
+		  	 
+	<p class="text-primary" align='left'>League Name: {{ currentDraft.leagueName }}</p>
+		  	 
+	<p class="text-primary" align='left'>Owner Name: {{ currentDraft.ownerId }}</p> 
+	<p class="text-primary" align='left'>Created: {{ currentDraft.dateCreated }}</p> 
+ 	 
+ 	<button type="button" class="btn btn-primary btn-mini" ng-click="changeView('MyDraft')" >Back</button>
+    </div>
+ </div>
+
+ <div class="span8 offset1">
+ 	<p class="text-primary" align='left'>Name Search</p>
+  		<input ng-model="searchText" >
+ 	 <h3 align='center'> Players </h3>
+ 	 	
+		 <table class="table table-hover" ng-controller="SortableTableCtrl">
+   		<tbody>
+   			<tr>
+   				<th ng-repeat="(i,th) in PlayerDataHead" ng-class="selectedCls(i)" ng-click="changeSorting(i)">{{th}}</th>
+   			</tr>
+   			<tr ng-repeat="athlete in athletes | filter:searchText">
+   				<td> <input type="checkbox" ng-model="selectedPlayer"></td>
+   				<td> {{ athlete.displayName}} </td>  
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+   				 
+   			</tr>
+   		</tbody>
+	</table>
+ 		
+ 	 	
+
+ 		   
+ 
+ 	 
+ </div>
+ 
+ 

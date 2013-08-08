@@ -30,7 +30,8 @@ var homeCtrl = myApp.controller('HomeCtrl', [function($scope) {
  }]);
 
   
-var researchPlayersCtrl = myApp.controller('ResearchPlayersCtrl', ['$scope', '$http', function($scope, $http) {
+var researchPlayersCtrl = myApp.controller('ResearchPlayersCtrl', ['$scope', '$rootScope', '$http', 
+	function($scope, $rootScope, $http) {
 
 	/* $scope.url = "http://api.espn.com/v1/sports/football/nfl/teams/?apikey=6w3k6rxsnm4a8g6sn9k9rq8s";  
 		http://api.espn.com/v1/sports/football/nfl/athletes/?offset=0&apikey=6w3k6rxsnm4a8g6sn9k9rq8s   OFFSET
@@ -79,7 +80,31 @@ var researchPlayersCtrl = myApp.controller('ResearchPlayersCtrl', ['$scope', '$h
 
 
 
-	$scope.addNFLPlayers = function() {
+	
+	
+		
+
+
+}]);
+
+
+ 
+
+
+var myDraftCtrl = myApp.controller('MyDraftCtrl', ['$scope', '$rootScope', '$http', '$location', 
+	function($scope, $rootScope, $http, $location) { 
+	 
+	$scope.drafts = [];
+	$rootScope.currentDraft = {};
+		 var sports = {};
+	 var leagues = {};
+
+		$scope.changeView = function(view){
+            	$location.path(view);  
+
+        	} 
+
+    $scope.addNFLPlayers = function() {
 
 
 		//Need to iterate over Max Players
@@ -93,27 +118,11 @@ var researchPlayersCtrl = myApp.controller('ResearchPlayersCtrl', ['$scope', '$h
 			sports = response.data.sports;
 			leagues = sports[0].leagues;
 
-			$scope.athletes = leagues[0].athletes;
+			$rootScope.athletes = leagues[0].athletes;
 
 		});
 	};
-	
-		
 
-
-}]);
-
-
-var myDraftCtrl = myApp.controller('MyDraftCtrl', ['$scope', '$http', function($scope, $http) { 
-	
-/*
-	$scope.refresh = function() {
-        $templateCache.remove('partials/MyDraftTab.html');
-        $scope.myTemplate = '';
-        $timeout(function() {
-            $scope.myTemplate = 'partials/MyDraftTab.html';
-        },1000);
-*/
 	$scope.addDrafts = function() {
 
 
@@ -122,8 +131,15 @@ var myDraftCtrl = myApp.controller('MyDraftCtrl', ['$scope', '$http', function($
 		$http.get($scope.url).then(function(response){
 
 			$scope.drafts = response.data; 
-
+			console.log($scope.drafts);
 		});
+	};
+
+	$scope.initCurrentDraft = function() {
+
+
+	
+
 	};
   
 
@@ -164,10 +180,20 @@ var myDraftCtrl = myApp.controller('MyDraftCtrl', ['$scope', '$http', function($
 	};
 
 	
-	$scope.onClickDraftSelection = function(){
+	$scope.onClickDraftSelection = function(item){
+ 			
+ 		 
+		var id = item._id;
 
-		$dialog.dialog({}).open('partials/ModalContent.html')
+		$http.defaults.useXDomain = true;
+		$scope.url = 'http://localhost:3000/drafts/' + id;
+		$http.get($scope.url).then(function(response){
 
+			$rootScope.currentDraft = response.data; 
+			console.log($rootScope.currentDraft);
+		});
+
+  
 	};
 	
  
@@ -227,3 +253,5 @@ var sortableTableCtrl = myApp.controller('SortableTableCtrl', ['$scope', functio
 
 
 	}]);
+
+
